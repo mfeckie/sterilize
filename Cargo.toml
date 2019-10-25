@@ -1,0 +1,15 @@
+[package]
+name = "sterilize"
+version = "0.1.0"
+authors = ["Martin Feckie <mfeckie@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rutie = "0.7.0"
+ammonia = "3.0.0"
+
+[lib]
+name = "sterilize"
+crate-type = ["dylib"]
