@@ -4,9 +4,41 @@ Sterilize is a gem which uses the Rust library [ammonia](https://github.com/rust
 
 > Ammonia is a whitelist-based HTML sanitization library. It is designed to prevent cross-site scripting, layout breaking, and clickjacking caused by untrusted user-provided HTML being mixed into a larger web page.
 
+## Why not Loofah
+
+Loofah is popular, but can be difficult to deal with in terms of configuration and usage. `Sterilize` aims to be essentially zero configuration and provides a very simple API (one method!). Give it a string and get back a sanitized version.
+
+Take a look at the specs directory to see some of the cases that get handled. They are mostly provided for documentation purposes as the `ammonia` library is extensively [tested](https://github.com/rust-ammonia/ammonia/blob/master/src/lib.rs)
+
+Finally, Sterilize is _fast_.
+
+```ruby
+unsafe_string = "I am nice safe user input, nothing to see here.. <script>console.log('installing bitcoin miner')</script>" * 10000
+
+Benchmark.bm do | benchmark |
+  benchmark.report("Loofah") do
+    50.times do
+      Loofah.fragment(unsafe_string).scrub!(:prune).to_str
+    end
+  end
+  benchmark.report("Sterilize") do
+    50.times do
+      Sterilize.perform(unsafe_string)
+    end
+  end
+end
+```
+
+As you can see, Sterilize is close to 10x faster.
+
+| Library   | user      | system   | total     | real         |
+| --------- | --------- | -------- | --------- | ------------ |
+| Loofah    | 26.515717 | 0.097612 | 26.613329 | ( 26.622616) |
+| Sterilize | 3.630285  | 0.004399 | 3.634684  | ( 3.636504)  |
+
 ## Installation
 
-In order to use this library you will need to have access to Rust's build tooling [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html), this simplest way to get this is via [rustup](https://rustup.rs/). 
+In order to use this library you will need to have access to Rust's build tooling [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html), this simplest way to get this is via [rustup](https://rustup.rs/).
 
 After ensuring you have these things available, add the gem to your bundle
 
