@@ -1,15 +1,13 @@
 PATH
   remote: .
   specs:
-    sterilize (0.2.0)
-      rutie (~> 0.0.3)
-      thermite (~> 0)
+    sterilize (0.3.0)
+      rutie (~> 0.0.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.3)
-    minitar (0.9)
     rake (10.4.2)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
@@ -25,11 +23,6 @@ GEM
       rspec-support (~> 3.8.0)
     rspec-support (3.8.2)
     rutie (0.0.4)
-    thermite (0.13.0)
-      minitar (~> 0.5)
-      rake (>= 10)
-      tomlrb (~> 1.2)
-    tomlrb (1.2.8)
 
 PLATFORMS
   ruby

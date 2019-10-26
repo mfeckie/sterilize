@@ -21,10 +21,12 @@ Gem::Specification.new do |spec|
   end
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.extensions << 'ext/Rakefile'
+
+  spec.extensions = ['ext/Rakefile']
   spec.require_paths = ["lib"]
-  spec.add_dependency 'rutie', '~> 0.0.3'
-  spec.add_runtime_dependency 'thermite', '~> 0'
+
+  spec.add_dependency 'rutie', '~> 0.0.4'
+
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.6"

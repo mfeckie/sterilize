@@ -20,7 +20,7 @@ methods!(
 #[allow(non_snake_case)]
 #[no_mangle]
 pub extern "C" fn Init_sterilize() {
-    Module::new("Sterilize").define(|itself| {
+    Module::from_existing("Sterilize").define(|itself| {
         itself.def_self("perform", perform);
     });
 }
