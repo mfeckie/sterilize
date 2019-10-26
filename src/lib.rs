@@ -11,8 +11,7 @@ methods!(
     Sterilize,
     _itself,
     fn perform(input: RString) -> RString {
-        let dirty_r_string = input.map_err(|e| VM::raise_ex(e)).unwrap();
-        let dirty_string = dirty_r_string.to_str();
+        let dirty_string = input.map_err(|e| VM::raise_ex(e)).unwrap().to_string();
         let sterile = clean(&dirty_string);
         RString::new_utf8(&sterile)
     }
