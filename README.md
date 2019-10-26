@@ -29,7 +29,7 @@ Benchmark.bm do | benchmark |
 end
 ```
 
-As you can see, Sterilize is close to 10x faster.
+As you can see, Sterilize is close to 10x faster. As with all benchmarks though, your mileage may vary and it's important to see how things work in practice for you.
 
 | Library   | user      | system   | total     | real         |
 | --------- | --------- | -------- | --------- | ------------ |
