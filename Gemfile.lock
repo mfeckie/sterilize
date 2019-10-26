@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sterilize (0.1.0)
+    sterilize (0.2.0)
       rutie (~> 0.0.3)
       thermite (~> 0)
 
