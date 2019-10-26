@@ -8,11 +8,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Martin Feckie"]
   spec.email         = ["mfeckie@gmail.com"]
 
-  spec.summary       = %q{}
+  spec.summary       = %q{A performant Rust based HTML sanitization library}
   spec.description   = %q{}
   spec.license       = "MIT"
-
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  spec.homepage =    "https://www.github.com/mfeckie/sterilize"
 
 
   # Specify which files should be added to the gem when it is released.
